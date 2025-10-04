@@ -7,7 +7,7 @@
 Categoria categoria_from_string(const char *str) {
     if (strcmp(str, "Cereais e derivados") == 0)
         return CEREAIS_DERIVADOS;
-    if (strcmp(str, "Frutas") == 0)
+    if (strcmp(str, "Frutas e derivados") == 0)
         return FRUTAS;
     if (strcmp(str, "Verduras e hortaliças") == 0)
         return VERDURAS_HORTALICAS;
@@ -91,10 +91,6 @@ Alimento parse_csv_line(char *line) {
 }
 
 // Função auxiliar que realiza o print do nosso vetor de structs (alimentos)
-// MARCOS: Não mexi pq n sei se já tá funcionando, mas escrito dessa forma
-// funciona? acho que a função devia receber um Alimentos vet[] como parâmetro
-// tbm e usar no lugar de alimentos[i] pra referenciar o vetor de Alimentos, n
-// é?
 void print_tabela(int line_count) {
     for (int i = 0; i < line_count; i++) {
         printf("%d | %s | %.1f | %d | %.1f | %.1f | %u\n", alimentos[i].numero,
@@ -123,8 +119,7 @@ int tamanho_vetor_filtrado(Alimento vet[], int tamanho_vet,
 Alimento *criar_vetor_filtrado(Alimento vet[], int tamanho_vet,
                                Categoria categoria_escolhida,
                                int *tamanho_filtrado) {
-    *tamanho_filtrado =
-        tamanho_vetor_filtrado(vet, tamanho_vet, categoria_escolhida);
+    *tamanho_filtrado = tamanho_vetor_filtrado(vet, tamanho_vet, categoria_escolhida);
 
     if (*tamanho_filtrado == 0) {
         return NULL;
@@ -220,4 +215,26 @@ void sortAlg(void *inicio, int tamanhoElemento, int qtdElementos,
         if (!troca)
             break;
     }
+}
+
+
+void imprimirFiltrados(Alimento vet[], int tamanho_vet, Categoria cat, Campo campo_ordenacao){
+    int tamanho_filtrado;
+    Alimento *aux_alimentos = criar_vetor_filtrado(alimentos, MAX_LINES, cat, &tamanho_filtrado);
+    if (aux_alimentos == NULL) {
+        printf("Nenhum alimento encontrado na categoria.\n");
+    }
+
+    Campo campo = campo_ordenacao;
+    sortAlg(aux_alimentos, sizeof(Alimento), tamanho_filtrado, cmp_alimento, &campo);
+
+    printf("\nLista de alimentos da categoria:\n");
+    for(int i = 0; i < tamanho_filtrado; i++){
+        printf("%d | %s | %.1f | %d | %.1f | %.1f | %u\n", aux_alimentos[i].numero,
+        aux_alimentos[i].descricao, aux_alimentos[i].umidade,
+        aux_alimentos[i].energia, aux_alimentos[i].proteina,
+        aux_alimentos[i].carboidrato, aux_alimentos[i].categoria);
+    }
+
+    free(aux_alimentos);
 }

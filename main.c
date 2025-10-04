@@ -12,7 +12,7 @@ int menu() {
     printf("                                        \n");
     printf("1. LISTAR TODAS AS CATEGORIAS DE ALIMENTO.\n");
     printf("2. *******\n");
-    printf("3. ********\n");
+    printf("3. LISTAR TODOS OS ALIMENTOS DE CERTA CATEGORIA EM ORDEM DECRESCENTE DE CAPACIDADE ENERGÉTICA\n");
     printf("4. *********\n");
     printf("5. *********\n");
     printf("6. *********\n");
@@ -44,7 +44,7 @@ int menu() {
             printf("Apague esse printf e coloque sua função\n");
             break;
         case '3':
-            printf("Apague esse printf e coloque sua função\n");
+            
             break;
         case '4':
             printf("Apague esse printf e coloque sua função\n");
@@ -90,7 +90,8 @@ int main() {
     }
 
     fclose(arquivo);
-    print_tabela(line_count);
+    //print_tabela(line_count);
+    imprimirFiltrados(alimentos, line_count, FRUTAS, PROTEINA);
 
     return 0;
 }
