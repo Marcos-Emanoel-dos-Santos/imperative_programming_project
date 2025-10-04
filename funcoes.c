@@ -218,6 +218,8 @@ void sortAlg(void *inicio, int tamanhoElemento, int qtdElementos,
 }
 
 
+// Função que recebe um vetor de Alimento, o tamanho do vetor, uma categoria e um campo,
+// e imprime um vetor daquela categoria ordenando com base no campo.
 void imprimirFiltrados(Alimento vet[], int tamanho_vet, Categoria cat, Campo campo_ordenacao){
     int tamanho_filtrado;
     Alimento *aux_alimentos = criar_vetor_filtrado(alimentos, MAX_LINES, cat, &tamanho_filtrado);

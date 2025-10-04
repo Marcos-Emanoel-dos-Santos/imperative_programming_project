@@ -91,6 +91,8 @@ int main() {
 
     fclose(arquivo);
     //print_tabela(line_count);
+
+    // TESTEM ISSO COM OUTRAS COISAS.
     imprimirFiltrados(alimentos, line_count, FRUTAS, PROTEINA);
 
     return 0;
